@@ -1,0 +1,24 @@
+# This is the ARMI settings file for FFTF. It defines basic modeling
+# and run settings and points to the blueprints file that defines
+# the reactor model. 
+#
+# See https://terrapower.github.io/armi/user/inputs/ for more info
+# about ARMI inputs
+metadata:
+  version: 0.1.4
+settings:
+  beta: 0.00318
+  burnSteps: 0
+  d3dMem: 159999000
+  detailedAxialExpansion: true
+  economics: false
+  epsEig: 1e-08
+  epsFSAvg: 1e-07
+  epsFSPoint: 1e-07
+  genXS: Neutron
+  loadingFile: FFTF-blueprints.yaml
+  numProcessors: 24
+  outers: 1000
+  power: 400000000.0
+  summarMem: 159999000
+  zoneFlowSummary: false

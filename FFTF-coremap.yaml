@@ -1,0 +1,47 @@
+# This input file defines the core map of FFTF. 
+# It is technically part of the blueprints input file
+# and is included into that with a !include directive. 
+#
+# See https://terrapower.github.io/armi/user/inputs 
+# for more info on ARMI input
+core:
+  geom: hex
+  lattice map: |
+    -       -       -       -       ORS     ORS     ORS 
+        -       -       -       ORS     ORS     ORS     ORS 
+    -       -       -       ORS     IRS     IRS     IRS     ORS 
+        -       -       ORS     IRS     IRS     IRS     IRS     ORS 
+    -       -       ORS     IRS     RR89    RR89    RR89    IRS     ORS 
+        -       ORS     IRS     RR89    RR89    RR89    RR89    IRS     ORS 
+    -       ORS     IRS     RR89    RR89    RR7     RR89    RR89    IRS     ORS 
+        -       IRS     RR89    RR89    RR7     RR7     RR89    RR89    IRS 
+    -       ORS     RR89    RR89    RR7     OC      RR7     RR89    RR89    ORS 
+        ORS     IRS     RR89    RR7     OC      OC      RR7     RR89    IRS     ORS 
+    -       IRS     RR89    RR7     OC      OC      FS      RR7     RR89    IRS 
+        ORS     RR89    RR7     OC      OC      OC      OC      RR7     RR89    ORS 
+    ORS     IRS     RR7     OC      OC      IC      OC      OC      RR7     IRS     ORS 
+        IRS     RR89    OC      SC4     ICS     IC      SC5     OC      RR89    IRS 
+    ORS     RR89    RR7     OC      IC      IC      IC      OC      RR7     RR89    ORS 
+        IRS     RR89    OC      IC      IC      IC      IC      OC      RR89    IRS 
+    ORS     RR89    RR7     SC3     PC2     ICS     PC3     SC6     RR7     RR89    ORS 
+        IRS     RR89    OC      IC      IC      IC      IC      OC      RR89    IRS 
+    ORS     RR89    RR7     OC      IC      IC      IC      OC      RR7     RR89    ORS 
+        IRS     RR89    VOTA    ICS     IC      IRT     ICS     OC      RR89    IRS 
+    ORS     RR89    RR7     OC      IC      IC      IC      OC      RR7     RR89    ORS 
+        IRS     RR89    OC      IC      IC      IC      IC      OC      RR89    IRS 
+    ORS     RR89    FS      OC      ICS     PC1     ICS     OC      RR7     RR89    ORS 
+        IRS     RR89    OC      OC      IC      IC      OC      OC      RR89    IRS 
+    ORS     IRS     RR7     OC      OC      IC      OC      OC      RR7     IRS     ORS 
+        ORS     RR89    RR7     OC      SC2     SC1     OC      FS      RR89    ORS 
+    -       IRS     RR89    RR7     OC      OC      OC      RR7     RR89    IRS 
+        ORS     IRS     RR89    RR7     OC      OC      RR7     RR89    IRS     ORS 
+    -       ORS     RR89    RR89    RR7     OC      RR7     RR89    RR89    ORS 
+        -       IRS     RR89    RR89    RR7     RR7     RR89    RR89    IRS 
+            ORS     IRS     RR89    RR89    RR7     RR89    RR89    IRS     ORS 
+                ORS     IRS     RR89    RR89    RR89    RR89    IRS     ORS 
+                    ORS     IRS     RR89    RR89    RR89    IRS     ORS 
+                        ORS     IRS     IRS     IRS     IRS     ORS 
+                            ORS     IRS     IRS     IRS     ORS 
+                                ORS     ORS     ORS     ORS 
+                                    ORS     ORS     ORS 
+  symmetry: full

@@ -1,0 +1,2026 @@
+# The ARMI Blueprints input file for FFTF. 
+# This file defines custom isotopics, pin dimensions, 
+# and assemblies.
+#
+# Learn about ARMI inputs at https://terrapower.github.io/armi/user/inputs/
+#
+# For the FFTF, we have explicit number densities defined by the benchmark.
+# Thus, rather than using ARMI material objects, we make most things
+# out of the `Custom` material and set number densities with 
+# the isotopics.
+#
+# ARMI uses YAML files for input rather than maintaining its
+# own input parser. https://en.wikipedia.org/wiki/YAML
+
+blocks:
+  AbsorberUpperPoison Plenum: &absorber_upper_poison_plenum
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberAbovePoisonRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  AbsorberLowerPoison Control: &absorber_lower_poison_control
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberBelowPoisonRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Absorber Control: &absorber_control
+    control:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberBoronCarbide
+      id: 0.0
+      od: 0.91948
+      mult: 61
+    gap:
+      shape: Circle
+      material: Void
+      Tinput: 179.85
+      Thot: 179.85
+      id: control.od
+      od: clad.id
+      mult: 61
+    clad:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      id: 0.94488
+      od: 1.20396
+      mult: 61
+    wire:
+      shape: Helix
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberSodiumCoolantWireWrapHomog
+      id: 0.0
+      helixDiameter: 1.26492
+      od: 0.06096
+      mult: 61
+      axialPitch: 30.48
+    innerduct:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      op: 10.42416
+      mult: 1
+      ip: 10.20064
+    duct:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      op: 11.6205
+      mult: 1
+      ip: 11.0109
+    interductcoolant:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SodiumCoolant453K
+      op: duct.ip
+      mult: 1
+      ip: innerduct.op
+    intercoolant:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SodiumCoolant453K
+      op: 12.051
+      mult: 1
+      ip: duct.op
+    coolant:
+      shape: DerivedShape
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberSodiumCoolantWireWrapHomog
+  Absorber Driveline Upper Duct: &absorber_driveline_upper_duct
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberDrivelineRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Absorber Lower Shield: &absorber_lower_shield
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberLowerShieldRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Absorber Lower Duct: &absorber_lower_duct
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: AbsorberWithdrawnAbsorberRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Plenum: &plenum
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelGasPlenumRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Pin Axial Reflector: &pin_axial_reflector
+    slug:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: Inconnel600
+      id: 0.0
+      od: 0.48133
+      mult: 217
+    gap:
+      shape: Circle
+      material: Void
+      Tinput: 179.85
+      Thot: 179.85
+      id: slug.od
+      od: clad.id
+      mult: 217
+    clad:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      id: 0.508
+      od: 0.5842
+      mult: 217
+    wire:
+      shape: Helix
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+      id: 0.0
+      helixDiameter: 0.72644
+      od: 0.14224
+      mult: 217
+      axialPitch: 30.48
+    duct:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      op: 11.6205
+      mult: 1
+      ip: 11.0109
+    intercoolant:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SodiumCoolant453K
+      op: 12.051
+      mult: 1
+      ip: duct.op
+    coolant:
+      shape: DerivedShape
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+  Inner Pin Attachment Structure: &inner_pin_attachment_structure
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelInnerPinAttachmentRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Inner Fuel Pin: &inner_fuel_pin
+    fuel:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InnerFuel
+      id: 0.0
+      od: 0.49403
+      mult: 217
+    gap:
+      shape: Circle
+      material: Void
+      Tinput: 179.85
+      Thot: 179.85
+      id: fuel.od
+      od: clad.id
+      mult: 217
+    clad:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      id: 0.508
+      od: 0.5842
+      mult: 217
+    wire:
+      shape: Helix
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+      id: 0.0
+      helixDiameter: 0.72644
+      od: 0.14224
+      mult: 217
+      axialPitch: 30.48
+    duct:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      op: 11.6205
+      mult: 1
+      ip: 11.0109
+    intercoolant:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SodiumCoolant453K
+      op: 12.051
+      mult: 1
+      ip: duct.op
+    coolant:
+      shape: DerivedShape
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+  Lower Axial Shield: &lower_axial_shield
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelLowerAxialShieldHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Outer Pin Attachment Structure: &outer_pin_attachment_structure
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelOuterPinAttachmentRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Outer Fuel Pin: &outer_fuel_pin
+    fuel:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: OuterFuel
+      id: 0.0
+      od: 0.49403
+      mult: 217
+    gap:
+      shape: Circle
+      material: Void
+      Tinput: 179.85
+      Thot: 179.85
+      id: fuel.od
+      od: clad.id
+      mult: 217
+    clad:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      id: 0.508
+      od: 0.5842
+      mult: 217
+    wire:
+      shape: Helix
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+      id: 0.0
+      helixDiameter: 0.72644
+      od: 0.14224
+      mult: 217
+      axialPitch: 30.48
+    duct:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      op: 11.6205
+      mult: 1
+      ip: 11.0109
+    intercoolant:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SodiumCoolant453K
+      op: 12.051
+      mult: 1
+      ip: duct.op
+    coolant:
+      shape: DerivedShape
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+  Pin Axial Insulator: &pin_axial_insulator
+    slug:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: UO2InsulatorPellets
+      id: 0.0
+      od: 0.4826
+      mult: 217
+    gap:
+      shape: Circle
+      material: Void
+      Tinput: 179.85
+      Thot: 179.85
+      id: slug.od
+      od: clad.id
+      mult: 217
+    clad:
+      shape: Circle
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      id: 0.508
+      od: 0.5842
+      mult: 217
+    wire:
+      shape: Helix
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+      id: 0.0
+      helixDiameter: 0.72644
+      od: 0.14224
+      mult: 217
+      axialPitch: 30.48
+    duct:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SS316
+      op: 11.6205
+      mult: 1
+      ip: 11.0109
+    intercoolant:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: SodiumCoolant453K
+      op: 12.051
+      mult: 1
+      ip: duct.op
+    coolant:
+      shape: DerivedShape
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: DriverFuelSodiumCoolantWireWrapHomog
+  Incore Shim Orifice Structure: &incore_shim_orifice_structure
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InCoreShimOrificeRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Incore Shim Pin Attachment Structure: &incore_shim_pin_attachment_structure
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InCoreShimPinAttachmentRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Incore Shim Simulated Pin: &incore_shim_simulated_pin
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InCoreShimSimulatedFuelPinRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Structure A: &in_reactor_thimble_structure_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Structure B: &in_reactor_thimble_structure_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Structure C: &in_reactor_thimble_structure_c
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Structure D: &in_reactor_thimble_structure_d
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Lower Detector Test A: &in_reactor_thimble_lower_detector_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Lower Detector Test B: &in_reactor_thimble_lower_detector_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Lower Detector Test C: &in_reactor_thimble_lower_detector_c
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Lower Detector Test D: &in_reactor_thimble_lower_detector_d
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  In Reactor Thimble Structure E: &in_reactor_thimble_structure_e
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InReactorThimbleHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Inner Radial Shield: &inner_radial_shield
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: InnerRadialShieldRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Outer Radial Shield: &outer_radial_shield
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: OuterRadialShieldRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector ACLP A: &radial_reflector_aclp_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR7LoadPadRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector Lower Adapter Structure A: &radial_reflector_lower_adapter_structure_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR7LowerAdapterRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector Orifice Structure A: &radial_reflector_orifice_structure_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR7OrificeRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector A: &radial_reflector_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR7ReflectorBlocksRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector Upper Shield A: &radial_reflector_upper_shield_a
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR7UpperShieldRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector ACLP B: &radial_reflector_aclp_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR89LoadPadRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector Lower Adapter Structure B: &radial_reflector_lower_adapter_structure_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR89LowerAdapterRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector Orifice Structure B: &radial_reflector_orifice_structure_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR89OrificeRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector B: &radial_reflector_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR89ReflectorBlocksRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Radial Reflector Upper Shield B: &radial_reflector_upper_shield_b
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: RadialReflectorR89UpperShieldRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Vibration Open Test Instrument Housing Structure: &vibration_open_test_instrument_housing_structure
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: VibrationOpenTestInstrumentsHousingRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+  Vibration Open Test Orifice Structure: &vibration_open_test_orifice_structure
+    homogeneous material:
+      shape: Hexagon
+      material: Custom
+      Tinput: 179.85
+      Thot: 179.85
+      isotopics: VibrationOpenTestOrificeShieldRegionHomog
+      op: 12.051
+      mult: 1
+      ip: 0.0
+assemblies:
+  Tertiary Fixed Shim Control:
+    specifier: FS
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 59.92774
+    - 2.0
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 79.5528
+    axial mesh points:
+    - 8
+    - 1
+    - 3
+    - 12
+    - 6
+    - 10
+    xs types:
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+  In Core Shim Structure:
+    specifier: ICS
+    blocks:
+    - *incore_shim_orifice_structure
+    - *incore_shim_pin_attachment_structure
+    - *incore_shim_simulated_pin
+    height:
+    - 54.61
+    - 10.16
+    - 233.68
+    axial mesh points:
+    - 7
+    - 2
+    - 30
+    xs types:
+    - B
+    - B
+    - B
+  In Reactor Thimble Structure:
+    specifier: IRT
+    blocks:
+    - *in_reactor_thimble_structure_a
+    - *in_reactor_thimble_lower_detector_a
+    - *in_reactor_thimble_structure_b
+    - *in_reactor_thimble_lower_detector_b
+    - *in_reactor_thimble_structure_c
+    - *in_reactor_thimble_lower_detector_c
+    - *in_reactor_thimble_structure_d
+    - *in_reactor_thimble_lower_detector_d
+    - *in_reactor_thimble_structure_e
+    height:
+    - 45.73
+    - 2.54
+    - 19.685
+    - 2.54
+    - 55.235
+    - 2.54
+    - 19.685
+    - 2.54
+    - 147.955
+    axial mesh points:
+    - 6
+    - 1
+    - 3
+    - 1
+    - 7
+    - 1
+    - 3
+    - 1
+    - 19
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Inner Fuel:
+    specifier: IC
+    blocks:
+    - *lower_axial_shield
+    - *inner_pin_attachment_structure
+    - *pin_axial_reflector
+    - *pin_axial_insulator
+    - *inner_fuel_pin
+    - *pin_axial_insulator
+    - *pin_axial_reflector
+    - *plenum
+    height:
+    - 54.61
+    - 10.16
+    - 14.478
+    - 2.032
+    - 91.44
+    - 2.032
+    - 14.478
+    - 109.22
+    axial mesh points:
+    - 7
+    - 2
+    - 2
+    - 1
+    - 12
+    - 1
+    - 2
+    - 14
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Inner Radial Shield:
+    specifier: IRS
+    blocks:
+    - *inner_radial_shield
+    height:
+    - 298.45
+    axial mesh points:
+    - 38
+    xs types:
+    - C
+  Outer Fuel:
+    specifier: OC
+    blocks:
+    - *lower_axial_shield
+    - *outer_pin_attachment_structure
+    - *pin_axial_reflector
+    - *pin_axial_insulator
+    - *outer_fuel_pin
+    - *pin_axial_insulator
+    - *pin_axial_reflector
+    - *plenum
+    height:
+    - 54.61
+    - 10.16
+    - 14.478
+    - 2.032
+    - 91.44
+    - 2.032
+    - 14.478
+    - 109.22
+    axial mesh points:
+    - 7
+    - 2
+    - 2
+    - 1
+    - 12
+    - 1
+    - 2
+    - 14
+    xs types:
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+  Outer Radial Shield:
+    specifier: ORS
+    blocks:
+    - *outer_radial_shield
+    height:
+    - 298.45
+    axial mesh points:
+    - 38
+    xs types:
+    - C
+  Primary Control 1:
+    specifier: PC1
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    height:
+    - 61.92774
+    - 91.44
+    - 19.35226
+    - 91.44
+    - 34.29
+    axial mesh points:
+    - 8
+    - 8
+    - 3
+    - 12
+    - 6
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+  Primary Control 2:
+    specifier: PC2
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    height:
+    - 61.92774
+    - 91.44
+    - 19.35226
+    - 91.44
+    - 34.29
+    axial mesh points:
+    - 8
+    - 8
+    - 3
+    - 12
+    - 6
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+  Primary Control 3:
+    specifier: PC3
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    height:
+    - 61.92774
+    - 91.44
+    - 19.35226
+    - 91.44
+    - 34.29
+    axial mesh points:
+    - 8
+    - 8
+    - 3
+    - 12
+    - 6
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+  Radial Reflector Row 7 A:
+    specifier: RR7
+    blocks:
+    - *radial_reflector_orifice_structure_a
+    - *radial_reflector_lower_adapter_structure_a
+    - *radial_reflector_a
+    - *radial_reflector_aclp_a
+    - *radial_reflector_upper_shield_a
+    height:
+    - 58.1025
+    - 7.62
+    - 121.92
+    - 10.16
+    - 100.6475
+    axial mesh points:
+    - 8
+    - 1
+    - 16
+    - 2
+    - 13
+    xs types:
+    - C
+    - C
+    - C
+    - C
+    - C
+  Radial Reflector Row 8-9 B:
+    specifier: RR89
+    blocks:
+    - *radial_reflector_orifice_structure_b
+    - *radial_reflector_lower_adapter_structure_b
+    - *radial_reflector_b
+    - *radial_reflector_aclp_b
+    - *radial_reflector_upper_shield_b
+    height:
+    - 58.1025
+    - 7.62
+    - 121.92
+    - 10.16
+    - 100.6475
+    axial mesh points:
+    - 8
+    - 1
+    - 16
+    - 2
+    - 13
+    xs types:
+    - C
+    - C
+    - C
+    - C
+    - C
+  Secondary Control 1:
+    specifier: SC1
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 61.92774
+    - 36.116
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 43.4368
+    axial mesh points:
+    - 8
+    - 4
+    - 3
+    - 12
+    - 6
+    - 5
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Secondary Control 2:
+    specifier: SC2
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 61.92774
+    - 35.56
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 43.9928
+    axial mesh points:
+    - 8
+    - 4
+    - 3
+    - 12
+    - 6
+    - 5
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Secondary Control 3:
+    specifier: SC3
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 61.92774
+    - 35.56
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 43.9928
+    axial mesh points:
+    - 8
+    - 4
+    - 3
+    - 12
+    - 6
+    - 5
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Secondary Control 4:
+    specifier: SC4
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 61.92774
+    - 35.56
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 43.9928
+    axial mesh points:
+    - 8
+    - 4
+    - 3
+    - 12
+    - 6
+    - 5
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Secondary Control 5:
+    specifier: SC5
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 61.92774
+    - 35.56
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 43.9928
+    axial mesh points:
+    - 8
+    - 4
+    - 3
+    - 12
+    - 6
+    - 5
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Secondary Control 6:
+    specifier: SC6
+    blocks:
+    - *absorber_lower_shield
+    - *absorber_lower_duct
+    - *absorber_lower_poison_control
+    - *absorber_control
+    - *absorber_upper_poison_plenum
+    - *absorber_driveline_upper_duct
+    height:
+    - 61.92774
+    - 35.56
+    - 19.35226
+    - 91.44
+    - 46.1772
+    - 43.9928
+    axial mesh points:
+    - 8
+    - 4
+    - 3
+    - 12
+    - 6
+    - 5
+    xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+  Vibration Open Test Structure:
+    specifier: VOTA
+    blocks:
+    - *vibration_open_test_orifice_structure
+    - *vibration_open_test_instrument_housing_structure
+    height:
+    - 57.15
+    - 241.3
+    axial mesh points:
+    - 8
+    - 31
+    xs types:
+    - C
+    - C
+systems:
+    core:
+        grid name: core
+        origin:
+            x: 0
+            y: 0
+            z: 0
+grids: 
+  !include FFTF-coremap.yaml
+custom isotopics:
+  # Custom isotopics override the default composition of materials
+  # specified components input.
+  AbsorberAbovePoisonRegionHomog:
+    input format: number densities
+    B10: 1.6616E-07
+    B11: 6.6882E-07
+    C: 7.5157E-05
+    N: 6.4447E-06
+    NA: 7.6440E-03
+    AL27: 1.6728E-05
+    SI: 2.4106E-04
+    P: 5.8288E-06
+    S: 2.8152E-06
+    V: 3.5440E-05
+    CR: 6.0763E-03
+    MN: 5.7509E-04
+    FE: 2.0709E-02
+    CO59: 7.6586E-06
+    NI: 4.1525E-03
+    CU: 1.4205E-05
+    AS75: 3.6146E-06
+    NB93: 4.8581E-06
+    MO: 4.7045E-04
+    TA181: 4.9887E-07
+  AbsorberBelowPoisonRegionHomog:
+    input format: number densities
+    B10: 1.7405E-07
+    B11: 7.0057E-07
+    C: 7.8725E-05
+    N: 6.7507E-06
+    NA: 1.4254E-02
+    AL27: 1.7522E-05
+    SI: 2.5250E-04
+    P: 6.1055E-06
+    S: 2.9488E-06
+    V: 3.7123E-05
+    CR: 6.3647E-03
+    MN: 6.0239E-04
+    FE: 2.1693E-02
+    CO59: 8.0222E-06
+    NI: 4.3497E-03
+    CU: 1.4880E-05
+    AS75: 3.7861E-06
+    NB93: 5.0887E-06
+    MO: 4.9278E-04
+    TA181: 5.2255E-07
+  AbsorberBoronCarbide:
+    input format: number densities
+    B10: 2.0297E-02
+    B11: 8.1700E-02
+    C: 2.3699E-02
+  AbsorberDrivelineRegionHomog:
+    input format: number densities
+    B10: 1.0681E-07
+    B11: 4.2993E-07
+    C: 4.8313E-05
+    N: 4.1429E-06
+    NA: 1.7881E-02
+    AL27: 1.0753E-05
+    SI: 1.5496E-04
+    P: 3.7469E-06
+    S: 1.8097E-06
+    V: 2.2782E-05
+    CR: 3.9060E-03
+    MN: 3.6968E-04
+    FE: 1.3313E-02
+    CO59: 4.9232E-06
+    NI: 2.6694E-03
+    CU: 9.1316E-06
+    AS75: 2.3235E-06
+    NB93: 3.1229E-06
+    MO: 3.0242E-04
+    TA181: 3.2069E-07
+  AbsorberLowerShieldRegionHomog:
+    input format: number densities
+    B10: 3.0703E-07
+    B11: 1.2358E-06
+    C: 1.3888E-04
+    N: 1.1909E-05
+    NA: 7.0810E-03
+    AL27: 3.0910E-05
+    SI: 4.4543E-04
+    P: 1.0770E-05
+    S: 5.2019E-06
+    V: 6.5487E-05
+    CR: 1.1228E-02
+    MN: 1.0627E-03
+    FE: 3.8267E-02
+    CO59: 1.4152E-05
+    NI: 7.6731E-03
+    CU: 2.6249E-05
+    AS75: 6.6790E-06
+    NB93: 8.9768E-06
+    MO: 8.6929E-04
+    TA181: 9.2181E-07
+  AbsorberSodiumCoolantWireWrapHomog:
+    input format: number densities
+    B10: 3.7987E-09
+    B11: 1.5290E-08
+    C: 1.7182E-06
+    N: 1.4734E-07
+    NA: 2.3415E-02
+    AL27: 3.8243E-07
+    SI: 5.5110E-06
+    P: 1.3326E-07
+    S: 6.4361E-08
+    V: 8.1023E-07
+    CR: 1.3892E-04
+    MN: 1.3148E-05
+    FE: 4.7346E-04
+    CO59: 1.7509E-07
+    NI: 9.4935E-05
+    CU: 3.2476E-07
+    AS75: 8.2636E-08
+    NB93: 1.1106E-07
+    MO: 1.0755E-05
+    TA181: 1.1405E-08
+  AbsorberWithdrawnAbsorberRegionHomog:
+    input format: number densities
+    B10: 4.1900E-08
+    B11: 1.6865E-07
+    C: 1.8952E-05
+    N: 1.6252E-06
+    NA: 2.1370E-02
+    AL27: 4.2183E-06
+    SI: 6.0787E-05
+    P: 1.4698E-06
+    S: 7.0990E-07
+    V: 8.9369E-06
+    CR: 1.5322E-03
+    MN: 1.4502E-04
+    FE: 5.2223E-03
+    CO59: 1.9313E-06
+    NI: 1.0471E-03
+    CU: 3.5821E-06
+    AS75: 9.1148E-07
+    NB93: 1.2251E-06
+    MO: 1.1863E-04
+    TA181: 1.2580E-07
+  DriverFuelGasPlenumRegionHomog:
+    input format: number densities
+    B10: 1.2816E-07
+    B11: 5.1585E-07
+    C: 5.7968E-05
+    N: 4.9707E-06
+    NA: 9.6390E-03
+    AL27: 1.2902E-05
+    SI: 1.8592E-04
+    P: 4.4957E-06
+    S: 2.1713E-06
+    V: 2.7335E-05
+    CR: 4.6866E-03
+    MN: 4.4356E-04
+    FE: 1.5973E-02
+    CO59: 5.9070E-06
+    NI: 3.2028E-03
+    CU: 1.0956E-05
+    AS75: 2.7879E-06
+    NB93: 3.7470E-06
+    MO: 3.6285E-04
+    TA181: 3.8477E-07
+  DriverFuelInnerPinAttachmentRegionHomog:
+    input format: number densities
+    B10: 1.8159E-07
+    B11: 7.3091E-07
+    C: 8.2135E-05
+    N: 7.0431E-06
+    NA: 1.3847E-02
+    AL27: 1.8281E-05
+    SI: 2.6344E-04
+    P: 6.3699E-06
+    S: 3.0766E-06
+    V: 3.8731E-05
+    CR: 6.6404E-03
+    MN: 6.2848E-04
+    FE: 2.2632E-02
+    CO59: 8.3697E-06
+    NI: 4.5381E-03
+    CU: 1.5524E-05
+    AS75: 3.9501E-06
+    NB93: 5.3091E-06
+    MO: 5.1412E-04
+    TA181: 5.4519E-07
+  DriverFuelLowerAxialShieldHomog:
+    input format: number densities
+    B10: 3.2491E-07
+    B11: 1.3078E-06
+    C: 1.4696E-04
+    N: 1.2602E-05
+    NA: 6.1160E-03
+    AL27: 3.2710E-05
+    SI: 4.7136E-04
+    P: 1.1398E-05
+    S: 5.5048E-06
+    V: 6.9300E-05
+    CR: 1.1882E-02
+    MN: 1.1245E-03
+    FE: 4.0495E-02
+    CO59: 1.4976E-05
+    NI: 8.1199E-03
+    CU: 2.7777E-05
+    AS75: 7.0679E-06
+    NB93: 9.4995E-06
+    MO: 9.1991E-04
+    TA181: 9.7549E-07
+  DriverFuelOuterPinAttachmentRegionHomog:
+    input format: number densities
+    B10: 1.7764E-07
+    B11: 7.1504E-07
+    C: 8.0351E-05
+    N: 6.8901E-06
+    NA: 1.4060E-02
+    AL27: 1.7884E-05
+    SI: 2.5772E-04
+    P: 6.2316E-06
+    S: 3.0097E-06
+    V: 3.7890E-05
+    CR: 6.4962E-03
+    MN: 6.1483E-04
+    FE: 2.2141E-02
+    CO59: 8.1879E-06
+    NI: 4.4395E-03
+    CU: 1.5187E-05
+    AS75: 3.8643E-06
+    NB93: 5.1938E-06
+    MO: 5.0296E-04
+    TA181: 5.3334E-07
+  DriverFuelSodiumCoolantWireWrapHomog:
+    input format: number densities
+    B10: 3.2283E-08
+    B11: 1.2994E-07
+    C: 1.4602E-05
+    N: 1.2521E-06
+    NA: 2.1876E-02
+    AL27: 3.2500E-06
+    SI: 4.6834E-05
+    P: 1.1325E-06
+    S: 5.4696E-07
+    V: 6.8856E-06
+    CR: 1.1805E-03
+    MN: 1.1173E-04
+    FE: 4.0236E-03
+    CO59: 1.4880E-06
+    NI: 8.0679E-04
+    CU: 2.7599E-06
+    AS75: 7.0226E-07
+    NB93: 9.4386E-07
+    MO: 9.1402E-05
+    TA181: 9.6924E-08
+  InCoreShimOrificeRegionHomog:
+    input format: number densities
+    B10: 4.2124E-07
+    B11: 1.6956E-06
+    C: 1.9054E-04
+    N: 1.6338E-05
+    NA: 1.4160E-03
+    AL27: 4.2408E-05
+    SI: 6.1112E-04
+    P: 1.4777E-05
+    S: 7.1370E-06
+    V: 8.9847E-05
+    CR: 1.5404E-02
+    MN: 1.4579E-03
+    FE: 5.2502E-02
+    CO59: 1.9416E-05
+    NI: 1.0527E-02
+    CU: 3.6013E-05
+    AS75: 9.1635E-06
+    NB93: 1.2316E-05
+    MO: 1.1927E-03
+    TA181: 1.2647E-06
+  InCoreShimPinAttachmentRegionHomog:
+    input format: number densities
+    B10: 1.8159E-07
+    B11: 7.3091E-07
+    C: 8.2135E-05
+    N: 7.0431E-06
+    NA: 1.3847E-02
+    AL27: 1.8281E-05
+    SI: 2.6344E-04
+    P: 6.3699E-06
+    S: 3.0766E-06
+    V: 3.8731E-05
+    CR: 6.6404E-03
+    MN: 6.2848E-04
+    FE: 2.2632E-02
+    CO59: 8.3697E-06
+    NI: 4.5381E-03
+    CU: 1.5524E-05
+    AS75: 3.9501E-06
+    NB93: 5.3091E-06
+    MO: 5.1412E-04
+    TA181: 5.4519E-07
+  InCoreShimSimulatedFuelPinRegionHomog:
+    input format: number densities
+    B10: 2.5805E-07
+    B11: 1.0387E-06
+    C: 1.1672E-04
+    N: 1.0009E-05
+    NA: 9.7230E-03
+    AL27: 2.5979E-05
+    SI: 3.7436E-04
+    P: 9.0521E-06
+    S: 4.3720E-06
+    V: 5.5039E-05
+    CR: 9.4365E-03
+    MN: 8.9312E-04
+    FE: 3.2162E-02
+    CO59: 1.1894E-05
+    NI: 6.4490E-03
+    CU: 2.2061E-05
+    AS75: 5.6134E-06
+    NB93: 7.5446E-06
+    MO: 7.3061E-04
+    TA181: 7.7475E-07
+  InReactorThimbleHomog:
+    input format: number densities
+    B10: 7.7205E-08
+    B11: 3.1076E-07
+    C: 3.4921E-05
+    N: 2.9945E-06
+    NA: 1.9568E-02
+    AL27: 7.7726E-06
+    SI: 1.1201E-04
+    P: 2.7083E-06
+    S: 1.3081E-06
+    V: 1.6467E-05
+    CR: 2.8233E-03
+    MN: 2.6721E-04
+    FE: 9.6225E-03
+    CO59: 3.5585E-06
+    NI: 1.9295E-03
+    CU: 6.6004E-06
+    AS75: 1.6795E-06
+    NB93: 2.2573E-06
+    MO: 2.1859E-04
+    TA181: 2.3180E-07
+  Inconnel600:
+    input format: number densities
+    C: 2.0908E-03
+    SI: 4.4707E-04
+    S: 1.1747E-05
+    CR: 1.4972E-02
+    MN: 1.5998E-03
+    FE: 7.1948E-03
+    CO59: 8.5222E-05
+    NI: 6.3016E-02
+    CU: 1.9759E-04
+  InnerFuel:
+    input format: number densities
+    O16: 4.3372E-02
+    U234: 1.0327E-06
+    U235: 1.2127E-04
+    U238: 1.6744E-02
+    NP237: 1.3313E-05
+    PU238: 2.6497E-06
+    PU239: 4.2072E-03
+    PU240: 5.6618E-04
+    PU241: 5.7297E-05
+    PU242: 9.2450E-06
+    AM241: 1.4025E-05
+  InnerRadialShieldRegionHomog:
+    input format: number densities
+    B10: 3.5148E-07
+    B11: 1.4147E-06
+    C: 1.5898E-04
+    N: 1.3632E-05
+    NA: 4.6830E-03
+    AL27: 3.5384E-05
+    SI: 5.0990E-04
+    P: 1.2329E-05
+    S: 5.9549E-06
+    V: 7.4966E-05
+    CR: 1.2853E-02
+    MN: 1.2165E-03
+    FE: 4.3806E-02
+    CO59: 1.6200E-05
+    NI: 8.7838E-03
+    CU: 3.0048E-05
+    AS75: 7.6458E-06
+    NB93: 1.0276E-05
+    MO: 9.9513E-04
+    TA181: 1.0552E-06
+  OuterFuel:
+    input format: number densities
+    O16: 4.2690E-02
+    U234: 9.9319E-07
+    U235: 1.1417E-04
+    U238: 1.5764E-02
+    NP237: 1.6063E-05
+    PU238: 3.1181E-06
+    PU239: 5.1998E-03
+    PU240: 7.0298E-04
+    PU241: 6.9284E-05
+    PU242: 1.2825E-05
+    AM241: 1.1744E-05
+  OuterRadialShieldRegionHomog:
+    input format: number densities
+    B10: 3.7558E-07
+    B11: 1.5118E-06
+    C: 1.6988E-04
+    N: 1.4567E-05
+    NA: 3.3830E-03
+    AL27: 3.7811E-05
+    SI: 5.4487E-04
+    P: 1.3175E-05
+    S: 6.3633E-06
+    V: 8.0108E-05
+    CR: 1.3735E-02
+    MN: 1.2999E-03
+    FE: 4.6811E-02
+    CO59: 1.7311E-05
+    NI: 9.3862E-03
+    CU: 3.2109E-05
+    AS75: 8.1701E-06
+    NB93: 1.0981E-05
+    MO: 1.0634E-03
+    TA181: 1.1276E-06
+  RadialReflectorR7LoadPadRegionHomog:
+    input format: number densities
+    B10: 3.8369E-07
+    B11: 1.5444E-06
+    C: 1.7355E-04
+    N: 1.4882E-05
+    NA: 2.9460E-03
+    AL27: 3.8627E-05
+    SI: 5.5664E-04
+    P: 1.3459E-05
+    S: 6.5007E-06
+    V: 8.1837E-05
+    CR: 1.4031E-02
+    MN: 1.3280E-03
+    FE: 4.7821E-02
+    CO59: 1.7685E-05
+    NI: 9.5888E-03
+    CU: 3.2802E-05
+    AS75: 8.3465E-06
+    NB93: 1.1218E-05
+    MO: 1.0863E-03
+    TA181: 1.1520E-06
+  RadialReflectorR7LowerAdapterRegionHomog:
+    input format: number densities
+    B10: 3.1698E-07
+    B11: 1.2759E-06
+    C: 1.4338E-04
+    N: 1.2294E-05
+    NA: 6.5440E-03
+    AL27: 3.1912E-05
+    SI: 4.5986E-04
+    P: 1.1119E-05
+    S: 5.3705E-06
+    V: 6.7609E-05
+    CR: 1.1592E-02
+    MN: 1.0971E-03
+    FE: 3.9507E-02
+    CO59: 1.4610E-05
+    NI: 7.9217E-03
+    CU: 2.7099E-05
+    AS75: 6.8954E-06
+    NB93: 9.2677E-06
+    MO: 8.9746E-04
+    TA181: 9.5168E-07
+  RadialReflectorR7OrificeRegionHomog:
+    input format: number densities
+    B10: 3.4337E-07
+    B11: 1.3821E-06
+    C: 1.5531E-04
+    N: 1.3318E-05
+    NA: 5.1210E-03
+    AL27: 3.4568E-05
+    SI: 4.9814E-04
+    P: 1.2045E-05
+    S: 5.8176E-06
+    V: 7.3237E-05
+    CR: 1.2557E-02
+    MN: 1.1884E-03
+    FE: 4.2796E-02
+    CO59: 1.5826E-05
+    NI: 8.5812E-03
+    CU: 2.9355E-05
+    AS75: 7.4694E-06
+    NB93: 1.0039E-05
+    MO: 9.7217E-04
+    TA181: 1.0309E-06
+  RadialReflectorR7ReflectorBlocksRegionHomog:
+    input format: number densities
+    B10: 9.6514E-08
+    B11: 3.8848E-07
+    C: 1.3432E-03
+    N: 3.7434E-06
+    NA: 3.4400E-03
+    AL27: 9.7165E-06
+    SI: 4.1789E-04
+    P: 3.3856E-06
+    S: 8.9367E-06
+    V: 2.0586E-05
+    CR: 1.2835E-02
+    MN: 1.3284E-03
+    FE: 1.6501E-02
+    CO59: 5.7417E-05
+    NI: 4.1579E-02
+    CU: 1.3106E-04
+    AS75: 2.0995E-06
+    NB93: 2.8218E-06
+    MO: 2.7326E-04
+    TA181: 2.8977E-07
+  RadialReflectorR7UpperShieldRegionHomog:
+    input format: number densities
+    B10: 3.7506E-07
+    B11: 1.5097E-06
+    C: 1.6965E-04
+    N: 1.4547E-05
+    NA: 3.4120E-03
+    AL27: 3.7758E-05
+    SI: 5.4411E-04
+    P: 1.3157E-05
+    S: 6.3545E-06
+    V: 7.9996E-05
+    CR: 1.3715E-02
+    MN: 1.2981E-03
+    FE: 4.6745E-02
+    CO59: 1.7287E-05
+    NI: 9.3731E-03
+    CU: 3.2064E-05
+    AS75: 8.1588E-06
+    NB93: 1.0966E-05
+    MO: 1.0619E-03
+    TA181: 1.1260E-06
+  RadialReflectorR89LoadPadRegionHomog:
+    input format: number densities
+    B10: 4.0109E-07
+    B11: 1.6144E-06
+    C: 1.8142E-04
+    N: 1.5557E-05
+    NA: 2.0070E-03
+    AL27: 4.0379E-05
+    SI: 5.8188E-04
+    P: 1.4070E-05
+    S: 6.7955E-06
+    V: 8.5549E-05
+    CR: 1.4667E-02
+    MN: 1.3882E-03
+    FE: 4.9990E-02
+    CO59: 1.8487E-05
+    NI: 1.0024E-02
+    CU: 3.4290E-05
+    AS75: 8.7251E-06
+    NB93: 1.1727E-05
+    MO: 1.1356E-03
+    TA181: 1.2042E-06
+  RadialReflectorR89LowerAdapterRegionHomog:
+    input format: number densities
+    B10: 3.3079E-07
+    B11: 1.3315E-06
+    C: 1.4962E-04
+    N: 1.2830E-05
+    NA: 5.7990E-03
+    AL27: 3.3302E-05
+    SI: 4.7989E-04
+    P: 1.1604E-05
+    S: 5.6044E-06
+    V: 7.0554E-05
+    CR: 1.2096E-02
+    MN: 1.1449E-03
+    FE: 4.1228E-02
+    CO59: 1.5247E-05
+    NI: 8.2668E-03
+    CU: 2.8280E-05
+    AS75: 7.1957E-06
+    NB93: 9.6713E-06
+    MO: 9.3655E-04
+    TA181: 9.9313E-07
+  RadialReflectorR89OrificeRegionHomog:
+    input format: number densities
+    B10: 2.6281E-07
+    B11: 1.0578E-06
+    C: 1.1887E-04
+    N: 1.0193E-05
+    NA: 9.4660E-03
+    AL27: 2.6458E-05
+    SI: 3.8127E-04
+    P: 9.2191E-06
+    S: 4.4527E-06
+    V: 5.6054E-05
+    CR: 9.6106E-03
+    MN: 9.0959E-04
+    FE: 3.2755E-02
+    CO59: 1.2113E-05
+    NI: 6.5679E-03
+    CU: 2.2468E-05
+    AS75: 5.7170E-06
+    NB93: 7.6838E-06
+    MO: 7.4408E-04
+    TA181: 7.8904E-07
+  RadialReflectorR89ReflectorBlocksRegionHomog:
+    input format: number densities
+    B10: 1.4214E-07
+    B11: 5.7214E-07
+    C: 1.2472E-03
+    N: 5.5132E-06
+    NA: 2.3240E-03
+    AL27: 1.4310E-05
+    SI: 4.5915E-04
+    P: 4.9863E-06
+    S: 9.0547E-06
+    V: 3.0318E-05
+    CR: 1.3669E-02
+    MN: 1.3971E-03
+    FE: 2.1787E-02
+    CO59: 5.4768E-05
+    NI: 3.9205E-02
+    CU: 1.2394E-04
+    AS75: 3.0921E-06
+    NB93: 4.1559E-06
+    MO: 4.0245E-04
+    TA181: 4.2676E-07
+  RadialReflectorR89UpperShieldRegionHomog:
+    input format: number densities
+    B10: 3.9583E-07
+    B11: 1.5933E-06
+    C: 1.7904E-04
+    N: 1.5353E-05
+    NA: 2.2910E-03
+    AL27: 3.9850E-05
+    SI: 5.7425E-04
+    P: 1.3885E-05
+    S: 6.7065E-06
+    V: 8.4427E-05
+    CR: 1.4475E-02
+    MN: 1.3700E-03
+    FE: 4.9335E-02
+    CO59: 1.8245E-05
+    NI: 9.8923E-03
+    CU: 3.3840E-05
+    AS75: 8.6107E-06
+    NB93: 1.1573E-05
+    MO: 1.1207E-03
+    TA181: 1.1884E-06
+  SS316:
+    input format: number densities
+    B10: 4.3730E-07
+    B11: 1.7602E-06
+    C: 1.9780E-04
+    N: 1.6961E-05
+    AL27: 4.4025E-05
+    SI: 6.3442E-04
+    P: 1.5340E-05
+    S: 7.4091E-06
+    V: 9.3272E-05
+    CR: 1.5992E-02
+    MN: 1.5135E-03
+    FE: 5.4503E-02
+    CO59: 2.0156E-05
+    NI: 1.0929E-02
+    CU: 3.7386E-05
+    AS75: 9.5128E-06
+    NB93: 1.2786E-05
+    MO: 1.2381E-03
+    TA181: 1.3129E-06
+  SodiumCoolant453K:
+    input format: number densities
+    NA: 2.3767E-02
+  SodiumCoolant478K:
+    input format: number densities
+    NA: 2.3620E-02
+  SodiumCoolant503K:
+    input format: number densities
+    NA: 2.3473E-02
+  UO2InsulatorPellets:
+    input format: number densities
+    O16: 4.6351E-02
+    U234: 1.2746E-06
+    U235: 1.6686E-04
+    U238: 2.3007E-02
+  VibrationOpenTestInstrumentsHousingRegionHomog:
+    input format: number densities
+    B10: 7.6923E-08
+    B11: 3.0963E-07
+    C: 3.4794E-05
+    N: 2.9836E-06
+    NA: 1.9249E-02
+    AL27: 7.7442E-06
+    SI: 1.1160E-04
+    P: 2.6984E-06
+    S: 1.3033E-06
+    V: 1.6407E-05
+    CR: 2.8130E-03
+    MN: 2.6624E-04
+    FE: 9.5874E-03
+    CO59: 3.5455E-06
+    NI: 1.9224E-03
+    CU: 6.5763E-06
+    AS75: 1.6733E-06
+    NB93: 2.2490E-06
+    MO: 2.1779E-04
+    TA181: 2.3095E-07
+  VibrationOpenTestOrificeShieldRegionHomog:
+    input format: number densities
+    B10: 4.2124E-07
+    B11: 1.6956E-06
+    C: 1.9054E-04
+    N: 1.6338E-05
+    NA: 1.4160E-03
+    AL27: 4.2408E-05
+    SI: 6.1112E-04
+    P: 1.4777E-05
+    S: 7.1370E-06
+    V: 8.9847E-05
+    CR: 1.5404E-02
+    MN: 1.4579E-03
+    FE: 5.2502E-02
+    CO59: 1.9416E-05
+    NI: 1.0527E-02
+    CU: 3.6013E-05
+    AS75: 9.1635E-06
+    NB93: 1.2316E-05
+    MO: 1.1927E-03
+    TA181: 1.2647E-06
+nuclide flags:
+  CU:
+    burn: false
+    xs: true
+  FE:
+    burn: false
+    xs: true
+  NA:
+    burn: false
+    xs: true
+  PU239:
+    burn: false
+    xs: true
+  TA181:
+    burn: false
+    xs: true
+  V:
+    burn: false
+    xs: true
+  NI:
+    burn: false
+    xs: true
+  CR:
+    burn: false
+    xs: true
+  U235:
+    burn: false
+    xs: true
+  B10:
+    burn: false
+    xs: true
+  PU241:
+    burn: false
+    xs: true
+  O16:
+    burn: false
+    xs: true
+  PU238:
+    burn: false
+    xs: true
+  S:
+    burn: false
+    xs: true
+  P:
+    burn: false
+    xs: true
+  SI:
+    burn: false
+    xs: true
+  B11:
+    burn: false
+    xs: true
+  AL27:
+    burn: false
+    xs: true
+  CO59:
+    burn: false
+    xs: true
+  U234:
+    burn: false
+    xs: true
+  PU240:
+    burn: false
+    xs: true
+  AM241:
+    burn: false
+    xs: true
+  MN:
+    burn: false
+    xs: true
+  PU242:
+    burn: false
+    xs: true
+  C:
+    burn: false
+    xs: true
+  AS75:
+    burn: false
+    xs: true
+  NP237:
+    burn: false
+    xs: true
+  U238:
+    burn: false
+    xs: true
+  N:
+    burn: false
+    xs: true
+  NB93:
+    burn: false
+    xs: true
+  MO:
+    burn: false
+    xs: true
