@@ -68,7 +68,10 @@ This will print lots of text and produce a `binary output file
     (armi-venv) $ python -m armi vis-file FFTF.h5
 
 Now open up your Paraview or VisIT program to view the model in 3D. Check out some of the
-number density parameters to see the core loading.
+number density parameters to see the core loading and control rod positions. 
+
+.. image:: fftf-control-rod-positions.png
+
 
 Explore the data model
 ----------------------
@@ -88,3 +91,10 @@ in physics capabilities. The `DRAGON plugin
 <https://github.com/terrapower/dragon-armi-plugin>`_ can compute microscopic
 cross sections for this model in ISOTXS format. More physics capabilities
 will become available as more people build ARMI plugins to other codes.
+
+
+Credits
+=======
+* Mohamed Elsawi initially created the FFTF input deck
+* Jacob Hader moved the CRs to the critical position and made several other enhancements
+
