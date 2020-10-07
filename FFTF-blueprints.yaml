@@ -790,6 +790,15 @@ assemblies:
     - *pin_axial_reflector
     - *pin_axial_insulator
     - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
+    - *inner_fuel_pin
     - *pin_axial_insulator
     - *pin_axial_reflector
     - *plenum
@@ -798,20 +807,47 @@ assemblies:
     - 10.16
     - 14.478
     - 2.032
-    - 91.44
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
     - 2.032
     - 14.478
-    - 109.22
+    - 129.22
     axial mesh points:
-    - 7
-    - 2
-    - 2
+    - 4
     - 1
-    - 12
     - 1
-    - 2
-    - 14
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 9
     xs types:
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
+    - B
     - B
     - B
     - B
@@ -838,6 +874,15 @@ assemblies:
     - *pin_axial_reflector
     - *pin_axial_insulator
     - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
+    - *outer_fuel_pin
     - *pin_axial_insulator
     - *pin_axial_reflector
     - *plenum
@@ -846,20 +891,47 @@ assemblies:
     - 10.16
     - 14.478
     - 2.032
-    - 91.44
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
+    - 9.144
     - 2.032
     - 14.478
-    - 109.22
+    - 129.22
     axial mesh points:
-    - 7
-    - 2
-    - 2
+    - 4
     - 1
-    - 12
     - 1
-    - 2
-    - 14
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 1
+    - 9
     xs types:
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
+    - C
     - C
     - C
     - C
