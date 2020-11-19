@@ -2078,6 +2078,7 @@ nuclide flags:
   C:
     burn: false
     xs: true
+    expandTo: [C12]
   AS75:
     burn: false
     xs: true
