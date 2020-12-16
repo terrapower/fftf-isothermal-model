@@ -819,7 +819,7 @@ assemblies:
     - 9.144
     - 2.032
     - 14.478
-    - 129.22
+    - 109.22
     axial mesh points:
     - 4
     - 1
@@ -903,7 +903,7 @@ assemblies:
     - 9.144
     - 2.032
     - 14.478
-    - 129.22
+    - 109.22
     axial mesh points:
     - 4
     - 1
@@ -963,7 +963,7 @@ assemblies:
     - 91.44
     - 19.35226
     - 91.44
-    - 34.29
+    - 34.29   
     axial mesh points:
     - 8
     - 8
@@ -989,7 +989,7 @@ assemblies:
     - 91.44
     - 19.35226
     - 91.44
-    - 34.29
+    - 34.29   
     axial mesh points:
     - 8
     - 8
@@ -1095,7 +1095,7 @@ assemblies:
     - 19.35226
     - 91.44
     - 46.1772
-    - 43.4368
+    - 43.4368 
     axial mesh points:
     - 8
     - 4
@@ -2078,6 +2078,8 @@ nuclide flags:
   C:
     burn: false
     xs: true
+    # Expand to just C-12, since ENDF 8 doesn't have cross-section data for C-14
+    expandTo: [C12]
   AS75:
     burn: false
     xs: true
