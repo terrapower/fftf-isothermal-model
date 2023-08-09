@@ -2021,6 +2021,7 @@ nuclide flags:
   V:
     burn: false
     xs: true
+    expandTo: [V51]
   NI:
     burn: false
     xs: true
