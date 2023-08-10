@@ -5,7 +5,7 @@
 # See https://terrapower.github.io/armi/user/inputs/ for more info
 # about ARMI inputs
 metadata:
-  version: 0.1.4
+  version: 0.2.8
 settings:
   beta: 0.00318
   burnSteps: 0
@@ -17,4 +17,3 @@ settings:
   loadingFile: FFTF-blueprints.yaml
   numProcessors: 24
   power: 400000000.0
-  zoneFlowSummary: false
