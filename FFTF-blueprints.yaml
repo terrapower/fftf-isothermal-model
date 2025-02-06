@@ -860,11 +860,15 @@ assemblies:
     specifier: IRS
     blocks:
     - *inner_radial_shield
+    - *inner_radial_shield
     height:
-    - 298.45
+    - 61.92774
+    - 236.52226
     axial mesh points:
+    - 8
     - 38
     xs types:
+    - C
     - C
   Outer Fuel:
     specifier: OC
@@ -944,11 +948,15 @@ assemblies:
     specifier: ORS
     blocks:
     - *outer_radial_shield
+    - *outer_radial_shield
     height:
-    - 298.45
+    - 61.92774
+    - 236.52226
     axial mesh points:
+    - 8
     - 38
     xs types:
+    - C
     - C
   Primary Control 1:
     specifier: PC1
